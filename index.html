@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./index.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="heading"> Google Translator </h1>
+            <div class="input-container">
+                <div class="source-lang-container">
+                    <label for="sourceLang"> From : </label>
+                    <select id= "sourceLang">
+                        <option value="en"> English </option>
+                        <option value="es"> Spanish </option>
+                        <option value="te"> Telugu </option>
+                    </select>
+                </div>
+                <textarea class="text-container" rows="10" cols="50" id="userInputContainer"></textarea>
+                <div class="target-lang-container">
+                    <label for="targetLang"> To : </label>
+                    <select id="targetLang">
+                        <option value="en"> English </option>
+                        <option value="es"> Spanish </option>
+                        <option value="te"> Telugu </option>
+                    </select>
+                </div>
+                <textarea class="text-container" rows="10" cols="50" id="userOutputContainer"></textarea>
+                <button id="translateBtn"> Translate </button>
+            </div>
+        </div>
+        <script src="./js files/index.js" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+body{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+.heading{
+    color: black;
+    size: 32px;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: lightcyan;
+    height: 100vh;
+}
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.text-container{
+    width: 70%;
+    margin: 30px;
+}
+
+.translate-button{
+    margin: 0px;
+    margin-top: 0px;
+    padding: 10px;
+    border-radius: 1px;
+    border: none;
+    background-color: wheat;
+}
