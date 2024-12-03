@@ -1,5 +1,5 @@
 
-
+import languageMap from './languageMap.js';
 
 let sourceLangElement = document.getElementById("sourceLang");
 let targetLangElement = document.getElementById("targetLang");
@@ -8,6 +8,72 @@ let userInput = document.getElementById("userInputContainer");
 let userOutput = document.getElementById("userOutputContainer");
 
 let translateBtnElement = document.getElementById("translateBtn");
+
+let isLanguageFetched = false;
+
+
+async function mapLanguagesInOptions(languageResults) {
+    console.log("mapLanguage in options");
+
+    languageResults.data.languages.map((eachLanguage) => {
+        // console.log(eachLanguage);
+
+        if (languageMap[eachLanguage.language]){
+            let optionsElement = document.createElement("option");
+            optionsElement.textContent = languageMap[eachLanguage.language]
+            
+            optionsElement.value = eachLanguage.language
+            
+            sourceLangElement.appendChild(optionsElement.cloneNode(true));
+            targetLangElement.appendChild(optionsElement);
+            
+        }
+    })
+
+}
+
+
+
+
+
+async function sourceLanguageApi () {
+
+    const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2/languages';
+
+    const options = {
+        method : "GET",
+        headers : {
+            'x-rapidapi-key': 'be437f3ca7msh0bad5a17ce9f5e5p164dc6jsnbc89126b7671',
+		    'x-rapidapi-host': 'google-translate1.p.rapidapi.com',
+		    'Accept-Encoding': 'application/gzip'
+        }
+    }
+
+    const fetchLanguageResults = await fetch(url, options);
+
+    const languageResults = await fetchLanguageResults.json();
+
+    await mapLanguagesInOptions(languageResults);
+
+    // console.log(languageResults);
+}
+
+
+
+sourceLangElement.onclick = async function() {
+    console.log("reached Source Language");
+
+    if (!isLanguageFetched) {
+        sourceLanguageApi();
+    }
+
+    isLanguageFetched = true;
+
+    
+}
+
+
+
 
 
 
@@ -59,7 +125,7 @@ try {
 
 
 
-translateBtnElement.onclick = function () {
+translateBtnElement.onclick = async function () {
 
     let userText = userInput.value;
 
@@ -76,7 +142,13 @@ translateBtnElement.onclick = function () {
         return alert('Please Enter Different language to Translate')
     }
 
-    makeApiCalls(userText, sourceLanguage, targetLanguage);
+    
+    translateBtnElement.disabled = true; // Before API call
+    await makeApiCalls(userText, sourceLanguage, targetLanguage);
+    translateBtnElement.disabled = false; // After API call
+
+
+    // makeApiCalls(userText, sourceLanguage, targetLanguage);
 
    
 }
